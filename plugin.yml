@@ -1,0 +1,11 @@
+name: AdderMCStaffLog
+main: me.moose.AdderMCDiscordBot.Main
+version: 1.0
+author: Moose1301
+api-version: 1.8.8
+commands:
+   ban:
+   tempban:
+   unban:
+   mute:
+   unmute:
