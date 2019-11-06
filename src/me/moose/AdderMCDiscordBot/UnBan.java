@@ -47,9 +47,7 @@ public class UnBan extends ListenerAdapter implements EventListener, CommandExec
 		    }
 		    if (args.length >= 1) {//args good
 		    	Bukkit.getBanList(Type.NAME).pardon(args[0]);
-		    	TextChannel textChannel = jda.getTextChannelsByName("staff-log",true).get(0);
-		    	textChannel.sendMessage(SenderString + " Has unbanned " + args[0] + " For Reason: " + args[1]).complete();
-		    	
+		    	TextChannel textChannel = (TextChannel) plugin.jda.getTextChannelsByName("staff-log", true).get(0).sendMessage(SenderString + " Has unbanned " + args[0] + " For Reason: " + args[1]).complete();
         return true;
         }
 	    }

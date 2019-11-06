@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.security.auth.login.LoginException;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -29,8 +31,7 @@ public class PermBan extends ListenerAdapter implements EventListener, CommandEx
  	       plugin.getCommand("ban").setExecutor(this);
 	}
 	@EventHandler(priority = EventPriority.HIGHEST)
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) { //Command start heres
-    	Player p = (Player) sender;
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {  //Command start heres
 	    if(!(sender.hasPermission("Addermc.Ban.perm"))) { //null perms
 	    	sender.sendMessage("Sorry you don't have Permission to do this.");
 	    	return false;
@@ -47,7 +48,7 @@ public class PermBan extends ListenerAdapter implements EventListener, CommandEx
     	Date date = new Date(System.currentTimeMillis());
         UUID ppu = pp.getUniqueId();
         String TargetUuid = ppu.toString();
-        String SenderString = sender.toString();
+        String SenderString = sender.getName().toString();
 	    if(!(sender.hasPermission("Addermc.Ban.perm"))) { //null perms
 	    	sender.sendMessage("Sorry you don't have Permission to do this.");
 	    	return true;
@@ -56,8 +57,7 @@ public class PermBan extends ListenerAdapter implements EventListener, CommandEx
 		    if (args.length >= 1) { //have pwerms and args is good
 		        plugin.getServer().getBanList(Type.NAME).addBan(TargetName, "§cYou are banned: " + args[1] + "\n §cAppeal on the Discord", null, null);
 		    	pp.kickPlayer("You were banned for: " + args[1]);
-		    	//TextChannel textChannel = jda.getTextChannelsByName("staff-log",true).get(0);
-		    	// textChannel.sendMessage(SenderString + " Has Permanently Banned " + args[0] + " For Reason: " + args[1] + " UUID: " + TargetUuid).queue();
+		    	TextChannel textChannel = (TextChannel) plugin.jda.getTextChannelsByName("staff-log", true).get(0).sendMessage(SenderString + " Has Permanently Banned " + args[0] + " For Reason: " + args[1] + " UUID: " + TargetUuid).complete();
         }
 	    }
 		return false;
