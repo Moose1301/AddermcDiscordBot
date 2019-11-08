@@ -16,7 +16,7 @@ import net.dv8tion.jda.core.JDABuilder;
 public class Main extends JavaPlugin implements Listener{
 	public Main plugin;
 	public static JDA jda;
-	public final String TOKEN = "NjE2NzUyNDIzMzUyMDA4NzA0.XWhJng.DZdzvbJsRKcyX6QXfLfetOsg9t8";
+	public final String TOKEN = "token";
 	public final String PREFIX = "!";
 	
 	@Override 
